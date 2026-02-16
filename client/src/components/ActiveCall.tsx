@@ -25,10 +25,10 @@ export default function ActiveCall({
     callId, isIncoming, callerName, video, onAccept, onReject, onEnd, sendSignal, incomingSignal
 }: CallProps) {
     const [status, setStatus] = useState<'ringing' | 'connecting' | 'connected' | 'ended'>('ringing');
-    const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
+    // const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
     const [localStream, setLocalStream] = useState<MediaStream | null>(null);
     const [isMuted, setIsMuted] = useState(false);
-    const [isCameraOff, setIsCameraOff] = useState(!video);
+    // const [isCameraOff, setIsCameraOff] = useState(!video);
 
     const peerRef = useRef<RTCPeerConnection | null>(null);
     const localVideoRef = useRef<HTMLVideoElement>(null);
@@ -48,7 +48,7 @@ export default function ActiveCall({
 
         pc.ontrack = (event) => {
             console.log('Got remote track', event.streams[0]);
-            setRemoteStream(event.streams[0]);
+            // setRemoteStream(event.streams[0]);
             if (remoteVideoRef.current) {
                 remoteVideoRef.current.srcObject = event.streams[0];
             }

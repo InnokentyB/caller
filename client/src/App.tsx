@@ -16,7 +16,7 @@ function App() {
     setLoading(false);
   }, []);
 
-  const handleLogin = (token: string, user: any) => {
+  const handleLogin = (_token: string, user: any) => {
     console.log('Logged in as', user);
     setIsAuthenticated(true);
   };
