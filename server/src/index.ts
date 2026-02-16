@@ -27,7 +27,7 @@ const clientPath = path.join(__dirname, '../../client/dist');
 app.use(express.static(clientPath));
 
 // Fallback to index.html for SPA routing
-app.get('*', (req, res) => {
+app.get(/.*/, (req, res) => {
     if (req.path.startsWith('/api')) {
         return res.status(404).json({ error: 'Not Found' });
     }
