@@ -38,8 +38,15 @@ const server = http.createServer(app);
 
 setupWebSocket(server);
 
-server.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+console.log('Starting server initialization...');
+
+try {
+    server.listen(Number(port), '0.0.0.0', () => {
+        console.log(`Server running on port ${port}`);
+        console.log(`Health check available at http://0.0.0.0:${port}/health`);
+    });
+} catch (e) {
+    console.error('Failed to start server:', e);
+}
 
 export { server, app };
