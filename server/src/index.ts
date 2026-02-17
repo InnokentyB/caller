@@ -8,12 +8,20 @@ import { setupWebSocket } from './websocket';
 
 const app = express();
 const port = process.env.PORT || 3000;
+console.log(`Configured to listen on port: ${port}`);
 
 app.use(cors());
 app.use(express.json());
 
 // Init DB
-initDB();
+try {
+    console.log('Initializing database...');
+    console.log('Current working directory:', process.cwd());
+    initDB();
+    console.log('Database initialized successfully.');
+} catch (e) {
+    console.error('Failed to initialize database:', e);
+}
 
 app.use('/api', apiRoutes);
 
@@ -36,7 +44,13 @@ app.get(/.*/, (req, res) => {
 
 const server = http.createServer(app);
 
-setupWebSocket(server);
+try {
+    console.log('Setting up WebSocket server...');
+    setupWebSocket(server);
+    console.log('WebSocket server setup complete.');
+} catch (e) {
+    console.error('Failed to setup WebSocket server:', e);
+}
 
 console.log('Starting server initialization...');
 
