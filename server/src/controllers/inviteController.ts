@@ -20,7 +20,7 @@ export const acceptInvite = (req: Request, res: Response) => {
     const user = (req as any).user;
 
     try {
-        const inviteStmt = db.prepare('SELECTCreator_id, used_by FROM invites WHERE code = ?');
+        const inviteStmt = db.prepare('SELECT creator_id, used_by FROM invites WHERE code = ?');
         const invite = inviteStmt.get(code) as any;
 
         if (!invite) {
