@@ -1,5 +1,8 @@
 
-const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:3000/api');
+const envApiUrl = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.PROD
+    ? (envApiUrl && !envApiUrl.includes('localhost') ? envApiUrl : '/api')
+    : (envApiUrl || 'http://localhost:3000/api');
 
 export const api = {
     async register(displayName: string, deviceInfo: string) {

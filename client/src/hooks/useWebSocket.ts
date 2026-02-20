@@ -1,11 +1,10 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 
-const WS_URL = import.meta.env.VITE_WS_URL || (
-    import.meta.env.PROD
-        ? `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}`
-        : 'ws://localhost:3000'
-);
+const envWsUrl = import.meta.env.VITE_WS_URL;
+const WS_URL = import.meta.env.PROD
+    ? (envWsUrl && !envWsUrl.includes('localhost') ? envWsUrl : `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}`)
+    : (envWsUrl || 'ws://localhost:3000');
 
 export interface MessagePayload {
     id: string;
