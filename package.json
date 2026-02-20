@@ -4,7 +4,8 @@
     "scripts": {
         "postinstall": "npm install --prefix client && npm install --prefix server",
         "build": "npm run build --prefix client && npm run build --prefix server",
-        "start": "npm start --prefix server"
+        "start": "npm start --prefix server",
+        "dev": "npx concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\""
     },
     "engines": {
         "node": ">=20"
